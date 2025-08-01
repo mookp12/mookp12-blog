@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+import logo from "./assets/logo.png"
 import "./App.css";
 
 function NavBar() {
@@ -10,7 +11,7 @@ function NavBar() {
         {/* Logo */}
         <div className="text-gray-800">
           <img
-            src="src\assets\logo.png"
+            src={logo}
             alt="Logo"
             className="h-[44px] w-auto"
           />
