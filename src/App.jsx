@@ -1,28 +1,26 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import logo from "/logo.png"
+import logo from "/logo.png";
 import "./App.css";
+import { Button } from "@/components/ui/button";
+import { Camera } from "lucide-react";
 
 function NavBar() {
   return (
-    <header className="w-full bg-[#F9F8F6] border-b border-gray-200">
-      <nav className="flex justify-between items-center px-6 py-[16px] max-w-7xl mx-auto">
+    <header className="bg-[#F9F8F6] border-b border-gray-200 h-[80px] w-full">
+      <nav className=" flex justify-between items-center px-6 py-[16px] max-w-[1200px] mx-auto">
         {/* Logo */}
         <div className="text-gray-800">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-[44px] w-auto"
-          />
+          <img src={logo} alt="Logo" className="h-[44px] w-auto" />
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-6">
-          <button className="px-8 py-3 rounded-full border border-gray-400 text-gray-800 font-medium text-lg">
+        <div className="flex justify-between items-center gap-6">
+          <button className="px-8 py-1 rounded-full border border-gray-400 text-gray-800 font-medium text-lg">
             Log in
           </button>
-          <button className="px-8 py-3 rounded-full bg-black text-white font-medium text-lg">
+          <button className="px-8 py-1 rounded-full bg-black text-white font-medium text-lg">
             Sign up
           </button>
         </div>
@@ -32,8 +30,8 @@ function NavBar() {
 }
 function HeroSection() {
   return (
-    <section className="pt-20 bg-[#F9F8F6] min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <section className="bg-[#F9F8F6] min-h-screen">
+      <div className="max-w-[1200px] mx-auto px-6 py-25">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
           {/* Left Section - Text Content */}
           <div className="space-y-6">
