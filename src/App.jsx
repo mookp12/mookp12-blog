@@ -1,20 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import logo from "/logo.png";
-import "./App.css";
-import { Button } from "@/components/ui/button";
-import { Camera } from "lucide-react";
+import logo from "./assets/logo.png";
 import { Menu } from 'lucide-react';
+
 
 function NavBar() {
   return (
     <header className="h-[48px] md:h-[80px] w-full bg-[#F9F8F6]  border-b border-[#DAD6D1]">
       <nav className=" max-w-sm mx-auto h-full px-4 md:max-w-[1200px] md:px-6 flex justify-between items-center ">
         {/* Logo */}
-        <div className="h-11 w-auto">
-          <img src={logo} alt="Logo" className="h-full w-auto"/>
-        </div>
+                  <div className="h-11 w-auto">
+            <img src={logo} alt="Logo" className="h-full w-auto" decoding="async" loading="eager"/>
+          </div>
 
         {/* Buttons */}
         <div className="hidden md:flex md:justify-between md:items-center md:gap-2">
@@ -56,8 +51,13 @@ function HeroSection() {
           <div className="flex justify-center">
             <div className="relative">
               <img
-                src="https://res.cloudinary.com/dcbpjtd1r/image/upload/v1728449784/my-blog-post/xgfy0xnvyemkklcqodkg.jpg"
+                src="https://res.cloudinary.com/dcbpjtd1r/image/upload/f_auto,q_auto:eco,w_400/my-blog-post/xgfy0xnvyemkklcqodkg.jpg"
+                srcSet="https://res.cloudinary.com/dcbpjtd1r/image/upload/f_auto,q_auto:eco,w_320/my-blog-post/xgfy0xnvyemkklcqodkg.jpg 320w, https://res.cloudinary.com/dcbpjtd1r/image/upload/f_auto,q_auto:eco,w_640/my-blog-post/xgfy0xnvyemkklcqodkg.jpg 640w, https://res.cloudinary.com/dcbpjtd1r/image/upload/f_auto,q_auto:eco,w_960/my-blog-post/xgfy0xnvyemkklcqodkg.jpg 960w"
+                sizes="(max-width: 768px) 320px, 400px"
                 alt="Man with beard and cat on shoulder in autumn forest"
+                decoding="async"
+                loading="eager"
+                fetchpriority="high"
                 className="w-80 h-96 object-cover rounded-lg"
               />
             </div>
@@ -86,8 +86,6 @@ function HeroSection() {
 }
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <NavBar />
