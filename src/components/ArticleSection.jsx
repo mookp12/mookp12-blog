@@ -50,6 +50,7 @@ export function ArticleSection() {
           <div className="hidden md:flex gap-6">
             {categories.map((category) => (
               <Button
+                className="bg-white text-brown-600"
                 key={category}
                 value={category}
                 onClick={handleCategoryChange}
