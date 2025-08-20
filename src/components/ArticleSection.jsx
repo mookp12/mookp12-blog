@@ -10,8 +10,32 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "@/components/BlogCard";
 import { blogPosts } from "@/data/blogPosts";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export function ArticleSection() {
+  const categories = ["Highlight", "Cat", "Inspiration", "General"];
+  const [selectedCategory, setSelectedCategory] = useState("Highlight");
+  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleFilter = () => {
+    if (selectedCategory === "Highlight") {
+      setFilteredPosts(blogPosts);
+    } else {
+      setFilteredPosts(
+        blogPosts.filter((post) => post.category === selectedCategory)
+      );
+    }
+  };
+
+  useEffect(() => {
+    handleFilter();
+  }, [selectedCategory]);
+
   return (
     <>
       <div className="bg-[#F9F8F6] ">
@@ -24,46 +48,58 @@ export function ArticleSection() {
       <div className="bg-[#EFEEEB]">
         <div className="p-4 gap-4 flex justify-between items-start  flex-col md:flex-row max-w-sm md:max-w-[1200px] mx-auto ">
           <div className="hidden md:flex gap-6">
-            <Button>Highlight</Button>
-            <Button>Cat</Button>
-            <Button>Inspiration</Button>
-            <Button>General</Button>
+            {categories.map((category) => (
+              <Button
+                key={category}
+                value={category}
+                onClick={handleCategoryChange}
+              >
+                {category}
+              </Button>
+            ))}
           </div>
-          <Input type="text" placeholder="Search" className="bg-white md:w-[360px]" />
+          <Input
+            type="text"
+            placeholder="Search"
+            className="bg-white md:w-[360px]"
+          />
           <p className="md:hidden">Search</p>
 
           <div className="md:hidden w-full">
             <Select>
               <SelectTrigger className="w-full bg-white">
-                <SelectValue placeholder="Highlight" />
+                <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Highlight">Highlight</SelectItem>
-                <SelectItem value="Cat">Cat</SelectItem>
-                <SelectItem value="Inspiration">Inspiration</SelectItem>
-                <SelectItem value="General">General</SelectItem>
+                {categories.map((category) => (
+                  <SelectItem
+                    key={category}
+                    value={category}
+                    onClick={handleCategoryChange}
+                  >
+                    {category}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-sm md:max-w-[1200px] mx-auto px-4" >
-        {blogPosts.map((post) => (
-          <BlogCard 
-            key={post.id} 
-            image={post.image}
-            category={post.category}
-            title={post.title}
-            description={post.description}
-            author={post.author}
-            date={post.date}
-            likes={post.likes}
-            content={post.content}
-          />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-sm md:max-w-[1200px] mx-auto px-4">
+          {filteredPosts.map((post) => (
+            <BlogCard
+              key={post.id}
+              image={post.image}
+              category={post.category}
+              title={post.title}
+              description={post.description}
+              author={post.author}
+              date={post.date}
+              likes={post.likes}
+              content={post.content}
+            />
+          ))}
         </div>
-
       </div>
-
     </>
   );
 }
