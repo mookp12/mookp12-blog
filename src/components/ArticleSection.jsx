@@ -66,7 +66,7 @@ export function ArticleSection() {
           <p className="md:hidden">Search</p>
 
           <div className="md:hidden w-full">
-            <Select>
+            <Select onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full bg-white">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
@@ -75,7 +75,7 @@ export function ArticleSection() {
                   <SelectItem
                     key={category}
                     value={category}
-                    onClick={handleCategoryChange}
+                    
                   >
                     {category}
                   </SelectItem>
