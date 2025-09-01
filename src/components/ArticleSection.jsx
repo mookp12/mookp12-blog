@@ -12,6 +12,7 @@ import { BlogCard } from "@/components/BlogCard";
 import { blogPosts } from "@/data/blogPosts";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
 export function ArticleSection() {
   const categories = ["Highlight", "Cat", "Inspiration", "General"];
@@ -22,18 +23,27 @@ export function ArticleSection() {
     setSelectedCategory(e.target.value);
   };
 
-  const handleFilter = () => {
+  //axios
+  const fetchPosts = async () => {
+
+    let newCatgeory = selectedCategory;
     if (selectedCategory === "Highlight") {
-      setFilteredPosts(blogPosts);
-    } else {
-      setFilteredPosts(
-        blogPosts.filter((post) => post.category === selectedCategory)
-      );
+      newCatgeory = "";
     }
+    try {
+      const response = await axios.get(
+        `https://blog-post-project-api.vercel.app/posts?category=${newCatgeory}`
+      );
+      console.log(response.data.posts);
+      setFilteredPosts(response.data.posts);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+
   };
 
   useEffect(() => {
-    handleFilter();
+    fetchPosts();
   }, [selectedCategory]);
 
   return (
@@ -73,11 +83,7 @@ export function ArticleSection() {
               </SelectTrigger>
               <SelectContent>
                 {categories.map((category) => (
-                  <SelectItem
-                    key={category}
-                    value={category}
-                    
-                  >
+                  <SelectItem key={category} value={category}>
                     {category}
                   </SelectItem>
                 ))}
@@ -94,7 +100,11 @@ export function ArticleSection() {
               title={post.title}
               description={post.description}
               author={post.author}
-              date={post.date}
+              date={new Date(post.date).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              })}
               likes={post.likes}
               content={post.content}
             />
