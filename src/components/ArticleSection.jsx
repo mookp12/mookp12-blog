@@ -13,6 +13,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function ArticleSection() {
   const categories = ["Highlight", "Cat", "Inspiration", "General"];
@@ -95,6 +96,7 @@ export function ArticleSection() {
           {filteredPosts.map((post) => (
             <BlogCard
               key={post.id}
+              postId={post.id}
               image={post.image}
               category={post.category}
               title={post.title}

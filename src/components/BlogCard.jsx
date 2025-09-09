@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 export function BlogCard(props) {
-    const {image, category, title, description, author, date, likes, content} = props;
+    const {postId, image, category, title, description, author, date, likes, content} = props;
+    const navigate = useNavigate();
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4" onClick={() => navigate(`/post/${postId}`)}>
         <a href="#" className="relative h-[212px] sm:h-[360px]">
           <img className="w-full h-full object-cover rounded-md" src={image}/>
         </a>
