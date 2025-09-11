@@ -1,5 +1,6 @@
 import logo from "/logo.png";
 import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,18 +15,24 @@ export function NavBar() {
     <header className="h-[48px] md:h-[80px] w-full bg-[#F9F8F6]  border-b border-[#DAD6D1]">
       <nav className=" max-w-sm mx-auto h-full px-4 md:max-w-[1200px] md:px-6 flex justify-between items-center ">
         {/* Logo */}
-        <div className="h-11 w-auto">
+        <Link to="/" className="h-11 w-auto">
           <img src={logo} alt="Logo" className="h-full w-auto" />
-        </div>
+        </Link>
 
         {/* Buttons */}
         <div className="hidden md:flex md:justify-between md:items-center md:gap-2">
-          <button className="px-10 py-3 rounded-full border-1 border-[#75716B] text-brown-600 font-medium text-lg">
+          <Link 
+            to="/login" 
+            className="px-10 py-3 rounded-full border-1 border-[#75716B] text-[#75716B] font-medium text-lg hover:bg-gray-50 transition-colors"
+          >
             Log in
-          </button>
-          <button className="px-10 py-3 rounded-full bg-black text-white font-medium text-lg">
+          </Link>
+          <Link 
+            to="/signup" 
+            className="px-10 py-3 rounded-full bg-black text-white font-medium text-lg hover:bg-gray-800 transition-colors"
+          >
             Sign up
-          </button>
+          </Link>
         </div>
 
         <div className="md:hidden">
@@ -35,14 +42,20 @@ export function NavBar() {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>
-                <button className="px-10 py-3 rounded-full border-1 border-[#75716B] text-brown-600 font-medium text-lg">
+                <Link 
+                  to="/login" 
+                  className="block px-10 py-3 rounded-full border-1 border-[#75716B] text-[#75716B] font-medium text-lg hover:bg-gray-50 transition-colors"
+                >
                   Log in
-                </button>
+                </Link>
               </DropdownMenuLabel>
               <DropdownMenuLabel>
-                <button className="px-10 py-3 rounded-full bg-black text-white font-medium text-lg">
+                <Link 
+                  to="/signup" 
+                  className="block px-10 py-3 rounded-full bg-black text-white font-medium text-lg hover:bg-gray-800 transition-colors"
+                >
                   Sign up
-                </button>
+                </Link>
               </DropdownMenuLabel>
             </DropdownMenuContent>
           </DropdownMenu>
