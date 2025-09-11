@@ -26,6 +26,7 @@ export function BlogCard(props) {
             <span>{date}</span>
           </div>
         </div>
+        
       </div>
     );
   }

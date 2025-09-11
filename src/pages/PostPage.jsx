@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 const PostPage = () => {
-
   const { postId } = useParams();
   console.log(postId);
   const [data, setData] = useState(null);
@@ -15,16 +15,18 @@ const PostPage = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`https://blog-post-project-api.vercel.app/posts/${postId}`);
+      const response = await axios.get(
+        `https://blog-post-project-api.vercel.app/posts/${postId}`
+      );
       setData(response.data);
       console.log(response.data);
     } catch (err) {
-      console.error('Error fetching post:', err);
-      setError(err.message || 'Failed to fetch post');
+      console.error("Error fetching post:", err);
+      setError(err.message || "Failed to fetch post");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchPost();
@@ -55,25 +57,29 @@ const PostPage = () => {
       <article>
         <header>
           <h1>{data.title}</h1>
-          <p>By {data.author} | {data.date}</p>
+          <p>
+            By {data.author} | {data.date}
+          </p>
           <p>Category: {data.category}</p>
         </header>
-        
+
         {data.image && (
           <img src={data.image} alt={data.title || "Blog post image"} />
         )}
-        
+
         <section>
           <p>{data.description}</p>
-          <div>{data.content}</div>
+          <div className="markdown">
+            <ReactMarkdown>{data.content}</ReactMarkdown>
+          </div>
         </section>
-        
+
         <footer>
           <p>Likes: {data.likes}</p>
         </footer>
       </article>
     </main>
-  )
-}
+  );
+};
 
-export default PostPage
+export default PostPage;
