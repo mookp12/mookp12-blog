@@ -1,6 +1,6 @@
 export function HeroSection() {
     return (
-      <section className="bg-[#F9F8F6] min-h-screen px-4 md:px-6 py-10 md:py-15"> 
+      <section className="bg-[#F9F8F6] px-4 md:px-6 py-10 md:py-15"> 
         <div className="max-w-sm md:max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
             {/* Left Section - Text Content */}
