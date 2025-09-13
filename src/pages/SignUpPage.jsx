@@ -1,7 +1,27 @@
 import { NavBar } from "../components/NavBar";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/authentication.jsx";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
+  const {register,state} = useAuth();
+  const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const result = await register(registerData);
+    if(result.error){
+      alert(result.error);
+    }else{
+      navigate("/");
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <NavBar />
@@ -23,6 +43,8 @@ export default function SignUpPage() {
                   id="name"
                   placeholder="Full name"
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  value={registerData.name}
+                  onChange={(e) => setRegisterData({...registerData, name: e.target.value})}
                 />
               </div>
               
@@ -34,6 +56,8 @@ export default function SignUpPage() {
                   type="text"
                   id="username"
                   placeholder="Username"
+                  value={registerData.username}
+                  onChange={(e) => setRegisterData({...registerData, username: e.target.value})}
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 />
               </div>
@@ -46,6 +70,8 @@ export default function SignUpPage() {
                   type="email"
                   id="email"
                   placeholder="Email"
+                  value={registerData.email}
+                  onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 />
               </div>
@@ -58,6 +84,8 @@ export default function SignUpPage() {
                   type="password"
                   id="password"
                   placeholder="Password"
+                  value={registerData.password}
+                  onChange={(e) => setRegisterData({...registerData, password: e.target.value})}
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 />
               </div>
@@ -65,6 +93,7 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 className="w-full bg-[#333333] text-white py-3 rounded-lg font-medium text-lg hover:bg-[#444444] transition-colors"
+                onClick={handleSubmit}
               >
                 Sign up
               </button>

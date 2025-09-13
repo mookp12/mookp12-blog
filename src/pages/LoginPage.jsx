@@ -1,7 +1,27 @@
 import { NavBar } from "../components/NavBar";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/authentication.jsx";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const {login,state} = useAuth();
+  const navigate = useNavigate();
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const result = await login(loginData);
+    console.log(result);
+    if(result.error){
+      alert(result.error);
+    }else{
+      navigate("/");
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <NavBar />
@@ -23,6 +43,8 @@ export default function LoginPage() {
                   id="email"
                   placeholder="Email"
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  value={loginData.email}
+                  onChange={(e) => setLoginData({...loginData, email: e.target.value})}
                 />
               </div>
               
@@ -35,12 +57,15 @@ export default function LoginPage() {
                   id="password"
                   placeholder="Password"
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#333333] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  value={loginData.password}
+                  onChange={(e) => setLoginData({...loginData, password: e.target.value})}
                 />
               </div>
               
               <button
                 type="submit"
                 className="w-full bg-[#333333] text-white py-3 rounded-lg font-medium text-lg hover:bg-[#444444] transition-colors"
+                onClick={handleSubmit}
               >
                 Log in
               </button>
